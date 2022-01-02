@@ -55,7 +55,7 @@ void show_penyanyi(mll list_penyanyi);
 void show_lagu(mll list_penyanyi, adr_penyanyi P);
 
 adr_penyanyi find_penyanyi(mll list_penyanyi);
-void find_lagu(mll list_penyanyi, adr_penyanyi P);
+adr_lagu find_lagu(mll list_penyanyi, string judul, string penyanyi);
 
 adr_lagu max_pendengar(mll &list_penyanyi);
 int rata_rating(mll &list_penyanyi, adr_penyanyi P);
