@@ -12,10 +12,24 @@ void newElm_penyanyi(string penyanyi, adr_penyanyi &P){
 }
 
 void newElm_lagu(string judul, string jmlPendengar, float rating, adr_lagu &L){
-
+    L = new elm_lagu;
+    info(L).judul = judul;
+    info(L).jmlPendengar = jmlPendengar;
+    info(L).rating = rating;
+    next(L) = nil;
+    prev(L) = nil;
 }
 
 void insertNew_Penyanyi(mll &list_penyanyi, adr_penyanyi P){
+    if (first(list_penyanyi) == nil) {
+        first(list_penyanyi) = P;
+    } else {
+        adr_penyanyi J = first(list_penyanyi)
+        while (next(J) != nil){
+            J = next(J);
+        }
+        next(J) = P;
+    }
 }
 
 void insertNew_Lagu(mll &list_penyanyi, adr_penyanyi P, adr_lagu L){
@@ -47,11 +61,31 @@ void delete_penyanyi(mll &list_penyanyi, adr_penyanyi &P){
 }
 
 void delete_lagu(mll &list_penyanyi, adr_penyanyi P, adr_lagu &L){
-
+    if (nextLagu(p) == nil){
+        L = nil;
+        cout<<"List Lagu kosong"<<endl;
+    } else if (next(nextLagu(p))) == nil){
+        L = nextLagu(p);
+        nextLagu(p) = nil;
+    } else {
+        L = nextLagu(p);
+        nextLagu(p) = next(nextLagu(p));
+    }
+    next(L) = nil;
+    prev(L) = nil;
 }
 
 void show_penyanyi(mll list_penyanyi){
-
+    int i = 1;
+    adr_penyanyi p = first(list_penyanyi);
+    if (p != nil){
+        cout<<"Playlist kosong"<<endl;
+    } else {
+        while (p != nil){
+            cout<<i<<". "<<info(p)<<endl;
+        }
+    }
+    cout<<endl;
 }
 
 void show_lagu(mll list_penyanyi, adr_penyanyi P){
@@ -78,8 +112,20 @@ adr_penyanyi find_penyanyi(mll list_penyanyi, string penyanyi){
 
 }
 
-void find_lagu(mll list_penyanyi, adr_penyanyi P){
-
+adr_lagu find_lagu(mll list_penyanyi, string judul, string penyanyi){
+    adr_penyanyi p = find_penyanyi(list_penyanyi, penyanyi);
+    if (p == nil){
+        cout<<"Penyanyi tidak ditemukan"<<endl;
+    } else {
+        adr_lagu L = nextLagu(p);
+        while (L != nil){
+            if (info(L).judul == judul){
+                return L;
+            }
+            L = next(L);
+        }
+    }
+    return nil;
 }
 
 /*adr_lagu max_pendengar(mll &list_penyanyi) {
