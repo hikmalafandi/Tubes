@@ -149,31 +149,35 @@ adr_lagu find_lagu(mll list_penyanyi, string judul, string penyanyi){
 
 }*/
 
-adr_lagu max_pendengar(adr_penyanyi P) {
+adr_lagu max_pendengar(mll &list_penyanyi) {
     adr_Lagu L, maxLagu;
-    L = nextLagu(P);
-    maxLagu = nextLagu(P);
-    while (L != NIL) {
-        if (info(L).jmlPendengar > info(maxLagu).jmlPendengar) {
-            maxLagu = L;
+    adr_penyanyi P = first(list_penyanyi);
+    while (P != NIL ) {
+        L = nextLagu(P);
+        maxLagu = nextLagu(P);
+        while (L != NIL) {
+            if (info(L).jmlPendengar > info(maxLagu).jmlPendengar) {
+                maxLagu = L;
+
+            }
+            L = next(L);
         }
-        L = next(L);
+        P = next(P);
     }
     return maxLagu;
 }
 
-int rata_rating(adr_penyanyi P) {
-    adr_Lagu L;
-    L = nextLagu(P);
-    int jumlah, i;
-    jumlah = 0;
-    i = 0;
-    while (L != NIL) {
-        jumlah = jumlah + info(L).rating;
-        i = i + 1;
-        L = next(L);
+int jumlahLagu(mll &list_penyanyi) {
+    adr_penyanyi P = first(list_penyanyi);
+    int i = 0;
+    while (P != NIL) {
+        adr_lagu L = nextLagu(P);
+        while (L != NIL) {
+            i = i + 1;
+            L = next(L);
+        }
+        P = next(P);
     }
-    return jumlah / i;
 }
 
 void buat_relasi(mll_lagu &listlagu, adr_penyanyi &P) {
