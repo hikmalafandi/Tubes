@@ -1,7 +1,7 @@
 #include "Tubes.h"
 
 void create_list(mll &list_penyanyi){
-
+    first(list_penyanyi) = NIL;
 }
 
 void newElm_penyanyi(string penyanyi, adr_penyanyi &P){
