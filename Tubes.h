@@ -64,6 +64,7 @@ void buat_relasi(mll_lagu &listlagu, adr_penyanyi &P, adr_lagu temp)
 void hapus_relasi(adr_penyanyi P);
 void createlistLagu(mll_lagu &listlagu);
 void insertLagu(mll_lagu &listlagu, adr_lagu L);
+int jumlahLagu(mll &list_penyanyi);
 
 
 
